@@ -294,13 +294,13 @@
   }
   .callout p { font-size: 14.5px; color: var(--text-2); margin: 0; line-height: 1.55; }
 
-  /* ===== Metadata bar ===== */
-  .meta-section {
-    padding: 8px 0 64px;
-  }
-  .meta-bar {
-    border-top: 1px solid var(--border);
+  /* ===== Metadata bar (lives INSIDE the article column) =====
+     Width matches the article body — the divider line and the
+     2-col grid don't stretch across the full page. */
+  .article-meta {
+    margin-top: 52px;
     padding-top: 32px;
+    border-top: 1px solid var(--border);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
@@ -445,7 +445,7 @@
     .hero { padding: 24px 0 40px; }
     .body-section { padding: 40px 0; }
     .related-section { padding: 48px 0 64px; }
-    .meta-bar { grid-template-columns: 1fr; gap: 20px; }
+    .article-meta { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
     .related-card { flex-basis: 78%; min-width: 240px; }
     .body-sidebar { gap: 16px; }
     .related-head h2 { font-size: 1.5rem; }
@@ -724,26 +724,22 @@
           <h3>Need help?</h3>
           <p>We've got you covered 24/7. Reach out via live chat, email at <a href="mailto:support@tracxn.com">support@tracxn.com</a>, or WhatsApp — we're always here to help.</p>
         </div>
+
+        <!-- Meta sits inside the article column so the rule + grid align with the article width, not the full page -->
+        <div class="article-meta">
+          <div class="meta-item">
+            <span class="meta-label">Launched on</span>
+            <span class="meta-value">May 11, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Category</span>
+            <span class="meta-value">Integration</span>
+          </div>
+        </div>
       </article>
     </div>
   </div>
 </section>
-
-<!-- ========== Meta bar ========== -->
-<div class="meta-section">
-  <div class="wrap">
-    <div class="meta-bar">
-      <div class="meta-item">
-        <span class="meta-label">Launched on</span>
-        <span class="meta-value">May 11, 2026</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Category</span>
-        <span class="meta-value">Integration</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ========== Related updates ========== -->
 <section class="related-section">
