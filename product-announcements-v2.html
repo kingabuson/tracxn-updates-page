@@ -566,7 +566,7 @@
     align-items: flex-start;
     gap: 32px;
     position: sticky;
-    top: 32px;
+    top: 104px;          /* clear the 72px sticky site-nav + 32px breathing room */
     margin-left: -12px;
     padding-top: 4px;
   }
@@ -899,9 +899,148 @@
     .card-sm h5 { font-size: 1rem; -webkit-line-clamp: 2; }
     .timeline-head { flex-direction: column; align-items: flex-start; gap: 8px; }
   }
+
+  /* =========================================================
+     SITE NAV (Tracxn header)
+     ========================================================= */
+  .site-nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .site-nav-inner {
+    width: 92%;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .site-brand {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 22px; letter-spacing: -0.015em;
+    color: var(--text);
+  }
+  .site-brand-mark {
+    width: 30px; height: 30px;
+    background: var(--text); color: white;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 17px; line-height: 1;
+  }
+  .site-brand-mark::after { content: 'T'; }
+  .site-nav-links {
+    display: flex; list-style: none; margin: 0; padding: 0;
+    gap: 36px; align-items: center;
+    flex: 1; justify-content: center; max-width: 600px;
+  }
+  .site-nav-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 15.5px; font-weight: 500; color: var(--text);
+    padding: 24px 0; line-height: 1;
+    transition: color .15s ease;
+  }
+  .site-nav-link:hover { color: var(--blue); }
+  .site-nav-link .chev { width: 11px; height: 11px; opacity: 0.55; }
+  .site-nav-right { display: flex; align-items: center; gap: 24px; }
+  .site-nav-login {
+    font-size: 15.5px; font-weight: 500; color: var(--text);
+    transition: color .15s ease;
+  }
+  .site-nav-login:hover { color: var(--blue); }
+  .site-cta {
+    background: #FF6B00; color: white;
+    padding: 12px 24px; border-radius: 6px;
+    font-size: 14.5px; font-weight: 700;
+    transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+    white-space: nowrap;
+  }
+  .site-cta:hover {
+    background: #E55E00;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(255, 107, 0, 0.30);
+  }
+
+  /* =========================================================
+     SITE FOOTER
+     ========================================================= */
+  .site-footer {
+    background: #0A1F3D;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 80px 0 32px;
+  }
+  .site-footer-inner {
+    width: 92%; max-width: 1280px; margin: 0 auto;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1.1fr 1.2fr 1fr 0.9fr;
+    gap: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  }
+  .footer-col h4 {
+    font-size: 18px; font-weight: 700; color: white;
+    margin: 0 0 24px; letter-spacing: -0.005em;
+  }
+  .footer-col ul {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .footer-col a {
+    font-size: 14px; color: rgba(255, 255, 255, 0.72);
+    transition: color .15s ease;
+  }
+  .footer-col a:hover { color: white; }
+  .footer-bottom {
+    padding-top: 32px;
+    text-align: center;
+    font-size: 12.5px; line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .footer-bottom p { margin: 0 0 4px; }
+  .footer-bottom a { color: rgba(255,255,255,0.75); text-decoration: underline; text-underline-offset: 2px; }
+  .footer-bottom a:hover { color: white; }
+
+  @media (max-width: 1024px) {
+    .site-nav-links { display: none; }
+    .footer-cols { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 640px) {
+    .site-nav-inner { height: 60px; }
+    .site-nav-right { gap: 14px; }
+    .site-nav-login { display: none; }
+    .site-cta { padding: 10px 16px; font-size: 13px; }
+    .footer-cols { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
+    .site-footer { padding: 56px 0 24px; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ========== Site nav ========== -->
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a href="https://tracxn.com" class="site-brand">
+      <span class="site-brand-mark" aria-hidden="true"></span>
+      <span>Tracxn</span>
+    </a>
+    <ul class="site-nav-links">
+      <li><a href="#" class="site-nav-link">Customers <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4.5l3 3 3-3"/></svg></a></li>
+      <li><a href="#" class="site-nav-link">Offerings <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4.5l3 3 3-3"/></svg></a></li>
+      <li><a href="#" class="site-nav-link">Company <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4.5l3 3 3-3"/></svg></a></li>
+      <li><a href="#" class="site-nav-link">Pricing</a></li>
+    </ul>
+    <div class="site-nav-right">
+      <a href="#" class="site-nav-login">Login</a>
+      <a href="#" class="site-cta">Get started. It's FREE!</a>
+    </div>
+  </div>
+</nav>
 
 <!-- ========== HERO ========== -->
 <header class="section hero">
@@ -2314,6 +2453,71 @@
     </div>
   </div>
 </section>
+
+<!-- ========== Site footer ========== -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Our Investors</a></li>
+          <li><a href="#">Product Releases</a></li>
+          <li><a href="#">News and Press Resources</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">ODR Portal</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Preferences</a></li>
+          <li><a href="#">GDPR</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customers</h4>
+        <ul>
+          <li><a href="#">Venture Capital Funds</a></li>
+          <li><a href="#">Private Equity Funds</a></li>
+          <li><a href="#">Accelerators and Incubators</a></li>
+          <li><a href="#">Investment Banks</a></li>
+          <li><a href="#">Corporate Innovation</a></li>
+          <li><a href="#">CorpDev and M&amp;A Teams</a></li>
+          <li><a href="#">Startup Founders</a></li>
+          <li><a href="#">Journalists and Publications</a></li>
+          <li><a href="#">Universities</a></li>
+          <li><a href="#">Government Agencies</a></li>
+          <li><a href="#">Banks and NBFCs</a></li>
+          <li><a href="#">Customer testimonials</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Tracxn</h4>
+        <ul>
+          <li><a href="#">Discover interesting lists</a></li>
+          <li><a href="#">Sector Research</a></li>
+          <li><a href="#">Offerings</a></li>
+          <li><a href="#">Search for Indian Legal Entity</a></li>
+          <li><a href="#">Insights by Tracxn</a></li>
+          <li><a href="#">Our Collaborations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Schedule Demo</a></li>
+          <li><a href="#">Get in touch</a></li>
+          <li><a href="#">See Pricing Plans</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Tracxn Technologies Limited. All rights reserved. Registered Office: L-248, 2nd Floor, 17th Cross, Sector 6, HSR Layout, Bengaluru, Karnataka 560102. CIN: L72200KA2012PLC065294.</p>
+      <p>Investor Grievances &amp; Compliance: Megha Tibrewal, Company Secretary &amp; Compliance Officer | Email: <a href="mailto:compliance-officer@tracxn.com">compliance-officer@tracxn.com</a> | Phone: +91-9036090116</p>
+    </div>
+  </div>
+</footer>
 
 <script>
   // ---------- Show more (pagination) ----------
