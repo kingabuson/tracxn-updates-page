@@ -15,5 +15,8 @@ DESIGN.md
 # Older v1 (kept locally for reference, not deployed)
 product-announcements.html
 
+# Claude Code project artifacts
+.claude/
+
 # Vercel
 .vercel
