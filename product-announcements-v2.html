@@ -419,6 +419,102 @@
   }
   .timeline-head-meta b { color: var(--text); font-weight: 700; }
 
+  /* ===== Search bar ===== */
+  .timeline-search-wrap { margin: 0 0 36px; }
+  .timeline-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 480px;
+    padding: 12px 14px 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .timeline-search:focus-within {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(20, 110, 245, 0.12);
+  }
+  .timeline-search .icon-search { width: 16px; height: 16px; color: var(--text-3); flex-shrink: 0; }
+  .timeline-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--text);
+    min-width: 0;
+    padding: 0;
+  }
+  .timeline-search input::placeholder { color: var(--text-4); }
+  .timeline-search input::-webkit-search-cancel-button,
+  .timeline-search input::-webkit-search-decoration {
+    -webkit-appearance: none; display: none;
+  }
+  .timeline-search .kbd {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    min-width: 22px; height: 22px;
+    padding: 0 6px;
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    font-size: 11px; font-weight: 600;
+    color: var(--text-3);
+    background: var(--bg-1);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .timeline-search.has-text .kbd { display: none; }
+  .timeline-search .search-clear {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--text-5);
+    color: white;
+    border: none; padding: 0;
+    cursor: pointer;
+    display: none;
+    align-items: center; justify-content: center;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+  .timeline-search .search-clear:hover { background: var(--text-3); }
+  .timeline-search .search-clear svg { width: 10px; height: 10px; }
+  .timeline-search.has-text .search-clear { display: inline-flex; }
+
+  .search-meta {
+    margin-top: 14px;
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .search-meta b { color: var(--text); font-weight: 700; }
+  .search-meta[hidden] { display: none; }
+  .search-no-results {
+    padding: 56px 16px;
+    text-align: center;
+    color: var(--text-2);
+    font-size: 16px;
+    border: 1px dashed var(--border);
+    border-radius: var(--r-md);
+    background: var(--bg-1);
+  }
+  .search-no-results.hidden { display: none; }
+  .search-no-results b { color: var(--text); }
+  .search-no-results .sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+  /* Search-driven hide takes precedence over pagination hide */
+  .ti.search-hidden, .ti-year.search-hidden { display: none !important; }
+
   .timeline-list {
     display: block;
     /* No gap — items create spacing via internal padding-bottom: 80px */
@@ -908,6 +1004,21 @@
     <div class="timeline-head">
       <h2>Every release, chronologically</h2>
       <div class="timeline-head-meta"><b>49</b> updates · Jan 2025 – Apr 2026</div>
+    </div>
+
+    <div class="timeline-search-wrap">
+      <label class="timeline-search" id="search-box">
+        <svg class="icon-search" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="7" cy="7" r="5"/>
+          <path d="M11 11l3.5 3.5"/>
+        </svg>
+        <input id="release-search" type="search" placeholder="Search releases by title, tag, or date…" autocomplete="off" spellcheck="false" />
+        <span class="kbd" aria-hidden="true">/</span>
+        <button type="button" class="search-clear" id="search-clear" aria-label="Clear search">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
+      </label>
+      <div class="search-meta" id="search-meta" hidden>Showing <b>0</b> matches</div>
     </div>
 
     <div class="timeline-list" id="timeline-list">
@@ -2234,6 +2345,111 @@
         btn.classList.add('copied');
         setTimeout(() => btn.classList.remove('copied'), 1600);
       });
+    });
+  })();
+
+  // ---------- Search ----------
+  (function () {
+    const list = document.getElementById('timeline-list');
+    const input = document.getElementById('release-search');
+    const box = document.getElementById('search-box');
+    const clearBtn = document.getElementById('search-clear');
+    const meta = document.getElementById('search-meta');
+    const paginationWrap = document.getElementById('pagination-wrap');
+    if (!list || !input) return;
+
+    const items = Array.from(list.querySelectorAll('.ti'));
+    const yearSeps = Array.from(list.querySelectorAll('.ti-year'));
+    const noResults = document.createElement('div');
+    noResults.className = 'search-no-results hidden';
+    noResults.innerHTML = 'No releases match your search.<span class="sub">Try a different keyword, a tag like “AI”, or a year like “2025”.</span>';
+    list.appendChild(noResults);
+
+    // Capture default hidden state (which items are paginated-hidden initially)
+    const defaultHidden = new WeakSet(items.filter(it => it.classList.contains('hidden')));
+
+    function applySearch(qRaw) {
+      const q = qRaw.trim().toLowerCase();
+      const active = q.length > 0;
+      box.classList.toggle('has-text', active);
+
+      if (!active) {
+        // Reset to default state — restore pagination hide, drop search hide
+        items.forEach(it => {
+          it.classList.remove('search-hidden');
+          if (defaultHidden.has(it)) it.classList.add('hidden'); else it.classList.remove('hidden');
+        });
+        yearSeps.forEach(y => y.classList.remove('search-hidden'));
+        if (paginationWrap) {
+          const stillHidden = items.some(it => defaultHidden.has(it));
+          paginationWrap.classList.toggle('hidden', !stillHidden);
+        }
+        meta.hidden = true;
+        noResults.classList.add('hidden');
+        return;
+      }
+
+      // Search active — un-paginate (show every match regardless), apply search-hidden to non-matches
+      let matchCount = 0;
+      items.forEach(it => {
+        const text = it.textContent.toLowerCase();
+        if (text.includes(q)) {
+          it.classList.remove('search-hidden', 'hidden');
+          matchCount++;
+        } else {
+          it.classList.add('search-hidden');
+        }
+      });
+
+      // Hide year separators that have no visible items in their range
+      yearSeps.forEach((sep, idx) => {
+        const next = yearSeps[idx + 1];
+        let hasMatch = false;
+        let cur = sep.nextElementSibling;
+        while (cur && cur !== next) {
+          if (cur.classList.contains('ti') && !cur.classList.contains('search-hidden')) {
+            hasMatch = true; break;
+          }
+          cur = cur.nextElementSibling;
+        }
+        sep.classList.toggle('search-hidden', !hasMatch);
+      });
+
+      meta.hidden = false;
+      meta.innerHTML = matchCount === 0
+        ? 'No matches'
+        : `Showing <b>${matchCount}</b> match${matchCount === 1 ? '' : 'es'}`;
+      noResults.classList.toggle('hidden', matchCount !== 0);
+      if (paginationWrap) paginationWrap.classList.add('hidden');
+    }
+
+    let debounce;
+    input.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => applySearch(input.value), 100);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      applySearch('');
+      input.focus();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        input.value = '';
+        applySearch('');
+        input.blur();
+      }
+    });
+
+    // "/" anywhere on the page focuses the search field
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+        e.preventDefault();
+        input.focus();
+        input.select();
+      }
     });
   })();
 </script>
