@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bring Tracxn data into BigQuery — Updates — Tracxn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #FFFFFF;
+    --bg-1:      #FAFBFC;
+    --bg-2:      #F5F8FE;
+    --bg-3:      #EDF2FE;
+    --bg-4:      #E1EAFC;
+
+    --text:      #0B1426;
+    --text-1:    #1F2937;
+    --text-2:    #4B5563;
+    --text-3:    #6B7280;
+    --text-4:    #9CA3AF;
+    --text-5:    #D1D5DB;
+
+    --border:    #E5E7EB;
+    --border-1:  #D1D5DB;
+    --border-2:  #F3F4F6;
+
+    --blue:        #146EF5;
+    --blue-dark:   #0052D9;
+    --blue-darker: #003FA8;
+    --blue-light:  #4F8DF9;
+    --blue-lighter:#93B5FC;
+    --blue-tint:   #E6EFFE;
+    --blue-tint-2: rgba(20, 110, 245, 0.08);
+    --blue-tint-3: rgba(20, 110, 245, 0.14);
+
+    --sec: clamp(3rem, 4vw + 1rem, 5rem);
+    --font: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.018em;
+    margin: 0;
+    color: var(--text);
+  }
+  h1 {
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4vw + 0.5rem, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 1.2vw + 1rem, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: clamp(1.25rem, 0.8vw + 0.95rem, 1.5rem);
+    font-weight: 700;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .container-narrow {
+    width: 90%;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ========== TOP BAR ========== */
+  .topbar {
+    border-bottom: 1px solid var(--border-2);
+    padding: 20px 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color .15s ease, gap .15s ease;
+  }
+  .back-link:hover { color: var(--blue); gap: 10px; }
+  .back-link svg { width: 14px; height: 14px; }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+    position: relative;
+  }
+  .icon-btn:hover { color: var(--blue); border-color: var(--blue-lighter); background: var(--bg-2); }
+  .icon-btn svg { width: 16px; height: 16px; }
+  .icon-btn-tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(2px);
+    background: var(--text);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .icon-btn.copied .icon-btn-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ========== ARTICLE HEADER ========== */
+  .article-header {
+    padding: 64px 0 32px;
+    border-bottom: 1px solid var(--border-2);
+    background:
+      radial-gradient(ellipse 800px 400px at 90% 0%, rgba(20,110,245,0.06) 0%, transparent 60%),
+      var(--bg);
+  }
+  .article-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px 6px 8px;
+    background: var(--blue-tint);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue-dark);
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+  }
+  .article-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--blue);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(20,110,245,0.18);
+    flex-shrink: 0;
+  }
+  .article-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blue-tint-3);
+    color: var(--blue-dark);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  .article-header h1 {
+    max-width: 920px;
+    margin-bottom: 24px;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  .article-meta-divider {
+    width: 4px;
+    height: 4px;
+    background: var(--text-4);
+    border-radius: 50%;
+  }
+  .article-meta-date {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-2);
+  }
+
+  /* ========== HERO IMAGE ========== */
+  .article-hero-image {
+    padding: 32px 0 0;
+  }
+  .hero-image-wrap {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    padding: 48px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-image-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ========== ARTICLE BODY ========== */
+  .article-body {
+    padding: 64px 0 32px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-1);
+  }
+  .article-body h2 {
+    margin: 56px 0 16px;
+    color: var(--text);
+  }
+  .article-body h2:first-child {
+    margin-top: 0;
+  }
+  .article-body h3 {
+    margin: 40px 0 12px;
+    color: var(--text);
+  }
+  .article-body p {
+    margin: 0 0 18px;
+  }
+  .article-body ul, .article-body ol {
+    margin: 0 0 24px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .article-body ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+  }
+  .article-body ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .article-body ol {
+    counter-reset: ol-counter;
+  }
+  .article-body ol li {
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 12px;
+    counter-increment: ol-counter;
+  }
+  .article-body ol li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--blue-tint);
+    color: var(--blue-dark);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font);
+  }
+  .article-body strong { font-weight: 700; color: var(--text); }
+  .article-body em { font-style: italic; color: var(--text-2); }
+  .article-body a {
+    color: var(--blue);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: rgba(20,110,245,0.3);
+    text-underline-offset: 3px;
+    transition: text-decoration-color .15s ease;
+  }
+  .article-body a:hover { text-decoration-color: var(--blue); }
+  .article-body code {
+    background: var(--bg-2);
+    color: var(--blue-dark);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--blue-tint-3);
+  }
+
+  /* Callout box */
+  .callout {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: var(--r-md);
+  }
+  .callout-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--blue-dark);
+    margin-bottom: 8px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Video / GIF placeholder block */
+  .media-block {
+    margin: 32px 0;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 32px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .media-block-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--text-3);
+  }
+  .media-block-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform .2s ease;
+    cursor: pointer;
+  }
+  .media-block:hover .media-block-icon { transform: scale(1.08); }
+  .media-block-icon svg { width: 22px; height: 22px; }
+  .media-block-caption {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+  }
+
+  /* ========== AUTHOR / FOOTER OF ARTICLE ========== */
+  .article-meta-footer {
+    padding: 32px 0 0;
+    border-top: 1px solid var(--border-2);
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .share-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .share-icons {
+    display: flex;
+    gap: 6px;
+  }
+  .share-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .share-icon:hover { color: var(--blue); border-color: var(--blue-lighter); background: var(--bg-2); }
+  .share-icon svg { width: 14px; height: 14px; }
+
+  .article-tags-footer {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* ========== PREV / NEXT NAV ========== */
+  .pn-nav {
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--border-2);
+    margin-top: 64px;
+  }
+  .pn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .pn-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 24px;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .pn-card:hover {
+    border-color: var(--blue-lighter);
+    box-shadow: 0 8px 24px rgba(20,110,245,0.08);
+    transform: translateY(-2px);
+  }
+  .pn-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .pn-label svg { width: 14px; height: 14px; }
+  .pn-card.pn-next .pn-label { justify-content: flex-end; }
+  .pn-card.pn-next { text-align: right; }
+  .pn-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    transition: color .15s ease;
+  }
+  .pn-card:hover .pn-title { color: var(--blue); }
+  .pn-date {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* ========== NEED HELP CTA ========== */
+  .need-help {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border-2);
+    padding: var(--sec) 0;
+  }
+  .need-help-inner {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .need-help h3 {
+    margin-bottom: 12px;
+    font-size: clamp(1.5rem, 1.2vw + 1rem, 2rem);
+  }
+  .need-help p {
+    color: var(--text-2);
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0 0 28px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: var(--blue);
+    color: white;
+    border-radius: var(--r-sm);
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(20,110,245,0.25);
+  }
+  .btn svg { width: 14px; height: 14px; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); border-color: var(--border-1); box-shadow: none; }
+  .help-actions {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .article-header { padding: 40px 0 24px; }
+    .hero-image-wrap { padding: 24px; }
+    .hero-image-inner { padding: 16px; }
+    .article-body { padding: 40px 0 16px; font-size: 16px; }
+    .pn-grid { grid-template-columns: 1fr; }
+    .article-meta-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== TOP BAR ========== -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <a href="product-announcements-v2.html" class="back-link">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 8H3M7 4L3 8l4 4"/></svg>
+      All updates
+    </a>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="copy-link-btn" aria-label="Copy link">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg>
+        <span class="icon-btn-tooltip">URL copied</span>
+      </button>
+      <button class="icon-btn" aria-label="Share">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="3" r="2"/><circle cx="12" cy="13" r="2"/><path d="M5.7 7l4.6-2.7M5.7 9l4.6 2.7"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ARTICLE HEADER ========== -->
+<header class="article-header">
+  <div class="container-narrow">
+    <span class="article-eyebrow">
+      <span class="article-eyebrow-dot" aria-hidden="true"></span>
+      <span>Latest release · Just shipped</span>
+    </span>
+    <div class="article-tags">
+      <span class="pill">Integration</span>
+      <span class="pill">Enterprise</span>
+      <span class="pill">Developer</span>
+    </div>
+    <h1>Bring Tracxn data directly into your Google Cloud BigQuery</h1>
+    <div class="article-meta">
+      <span class="article-meta-date">May 11, 2026</span>
+      <span class="article-meta-divider"></span>
+      <span>4 min read</span>
+      <span class="article-meta-divider"></span>
+      <span>By the Tracxn team</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO IMAGE ========== -->
+<section class="article-hero-image">
+  <div class="container">
+    <div class="hero-image-wrap">
+      <div class="hero-image-inner">
+        <img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a0eb460a45bf9cca0a2c007_PA%20Thumbnail%20%20Big%20Query%20Integration.svg" alt="BigQuery Integration" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ARTICLE BODY ========== -->
+<article class="article-body">
+  <div class="container-narrow">
+
+    <p>We are elated to expand our developer ecosystem with the launch of our <strong>BigQuery (Google Cloud) integration</strong>. Joining our existing suite of APIs, SFTP Dumps, and Snowflake offerings, this integration is designed for teams who need to blend Tracxn's deep market intelligence with their own internal data pipelines for large-scale analytics.</p>
+
+    <h2>What does this integration offer?</h2>
+    <p><em>This new offering enables a more automated and robust data workflow for users within the Google Cloud ecosystem.</em></p>
+
+    <ul>
+      <li><strong>Direct Analytics Hub Access:</strong> No more manual exports. Access Tracxn data directly in your BigQuery environment via the Google Cloud Analytics Hub for seamless data delivery.</li>
+      <li><strong>Automated Data Integrity:</strong> We use sophisticated Merge (Upsert/Delete) logic to keep your tables synced and clean. Whether you choose a daily or monthly schedule, your records stay updated and duplicate-free — automatically.</li>
+      <li><strong>SQL-Ready Bulk Analytics:</strong> While APIs are perfect for real-time triggers, BigQuery is built for high-volume analysis. Blend Tracxn data with your internal datasets using standard SQL to uncover deeper market trends.</li>
+    </ul>
+
+    <div class="callout">
+      <span class="callout-label">Built for analysts &amp; data engineers</span>
+      <p>If your team already lives in BigQuery, this integration turns Tracxn into a first-class citizen of your analytics stack. Schedule daily syncs, write joins against your CRM data, and build dashboards on top of fresh market intelligence — all without exporting a single CSV.</p>
+    </div>
+
+    <h2>How to get started</h2>
+    <p><em>Setting up your BigQuery data pipeline is a collaborative process — we work with you to make sure the data fits your exact use case.</em></p>
+
+    <ol>
+      <li>Click on <strong>API &amp; Dev Tools</strong> from the left navigation menu.</li>
+      <li>Locate the <strong>BigQuery (Google Cloud)</strong> section and click <code>Learn More</code>.</li>
+      <li>Click the <strong>Contact Specialist</strong> button.</li>
+      <li>Define your use case — tell us how you intend to use the data, what fields you need, and your preferred sync schedule.</li>
+    </ol>
+
+    <p>Alternatively, you can reach out directly to our team at <a href="mailto:apidesk@tracxn.com">apidesk@tracxn.com</a> to begin the configuration. Most setups go live within 5 business days.</p>
+
+    <h2>See it in action</h2>
+    <p>Here's a quick walkthrough showing how Tracxn data lands in BigQuery, gets joined with internal data, and powers a market-trend dashboard.</p>
+
+    <div class="media-block">
+      <div class="media-block-inner">
+        <span class="media-block-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7L8 5z"/></svg>
+        </span>
+        <span class="media-block-caption">Watch: BigQuery integration setup (1:24)</span>
+      </div>
+    </div>
+
+    <h2>Why this matters</h2>
+    <p>Until now, getting Tracxn data into BigQuery required scheduled API pulls or manual SFTP ingestion — workable, but brittle. The native Analytics Hub connection removes the plumbing layer entirely: you authenticate once, choose a schedule, and the data lands. The Upsert logic means re-runs are idempotent, so you can trust the table state without writing custom dedup scripts.</p>
+
+    <p>This also unlocks <strong>blended analytics</strong> that weren't practical before. Join Tracxn's funding-round dataset against your CRM's account-level pipeline to see which targets are about to raise. Layer our sector taxonomy over your portfolio companies to spot category exposure. Run cohort analyses across acquisitions data without leaving BigQuery.</p>
+
+    <h2>Need help?</h2>
+    <p>We've got you covered 24/7. Reach out via live chat, email at <a href="mailto:support@tracxn.com">support@tracxn.com</a>, or WhatsApp — we're always here to help.</p>
+
+    <div class="article-meta-footer">
+      <div class="share">
+        <span class="share-label">Share</span>
+        <div class="share-icons">
+          <a href="#" class="share-icon" aria-label="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8 17V10H5.5v7H8zM6.75 8.83a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88zM18 17v-4.04c0-2.17-1.18-3.18-2.75-3.18-1.27 0-1.84.7-2.16 1.19V10H10.5v7H13v-3.7c0-.25.02-.49.09-.66.2-.49.65-1 1.4-1 .99 0 1.38.76 1.38 1.86V17H18z"/></svg>
+          </a>
+          <a href="#" class="share-icon" aria-label="Share on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21l-6.522 7.456L22 22h-6.063l-4.757-6.196L5.69 22H3l7.005-8.014L2 2h6.219l4.31 5.7L18.244 2zm-2.124 18h1.832L7.94 4H6.01l10.11 16z"/></svg>
+          </a>
+          <a href="mailto:?subject=Tracxn%20BigQuery%20Integration" class="share-icon" aria-label="Share via email">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 5l6 4 6-4"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="article-tags-footer">
+        <span class="pill">Integration</span>
+        <span class="pill">BigQuery</span>
+        <span class="pill">Enterprise</span>
+      </div>
+    </div>
+
+    <!-- Prev / Next nav -->
+    <div class="pn-nav">
+      <div class="pn-grid">
+        <a href="pa-detail.html" class="pn-card pn-prev">
+          <div class="pn-label">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 8H3M7 4L3 8l4 4"/></svg>
+            Previous
+          </div>
+          <div class="pn-title">Use Tracxn's data inside Claude — natively</div>
+          <div class="pn-date">Apr 30, 2026</div>
+        </a>
+        <a href="pa-detail.html" class="pn-card pn-next">
+          <div class="pn-label">
+            Next
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+          <div class="pn-title">1M+ verified financials for Indian Legal Entities</div>
+          <div class="pn-date">Apr 29, 2026</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<!-- ========== NEED HELP CTA ========== -->
+<section class="need-help">
+  <div class="container-narrow need-help-inner">
+    <h3>Have questions?</h3>
+    <p>Our team is available 24/7 via live chat, email, and WhatsApp — for setup help, custom configurations, or any question along the way.</p>
+    <div class="help-actions">
+      <a href="#" class="btn">
+        Contact specialist
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#" class="btn btn-ghost">Browse all updates</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Copy link button
+  document.getElementById('copy-link-btn')?.addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    try { navigator.clipboard.writeText(window.location.href); } catch {}
+    btn.classList.add('copied');
+    setTimeout(() => btn.classList.remove('copied'), 1600);
+  });
+</script>
+
+</body>
+</html>

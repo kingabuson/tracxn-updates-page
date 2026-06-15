@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Updates — Tracxn</title>
+<meta name="description" content="See the latest Tracxn product launches, integrations, and data expansions." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  /* =========================================================
+     Tracxn Updates — light mode, Roboto only
+     Timeline uses CSS "punch-through" trick for continuous line
+     ========================================================= */
+  :root {
+    /* Whites & soft backgrounds */
+    --bg:        #FFFFFF;
+    --bg-1:      #FAFBFC;
+    --bg-2:      #F5F8FE;
+    --bg-3:      #EDF2FE;
+    --bg-4:      #E1EAFC;
+
+    /* Text — near-black with hint of blue undertone */
+    --text:      #0B1426;
+    --text-1:    #1F2937;
+    --text-2:    #4B5563;
+    --text-3:    #6B7280;
+    --text-4:    #9CA3AF;
+    --text-5:    #D1D5DB;
+
+    /* Borders */
+    --border:    #E5E7EB;
+    --border-1:  #D1D5DB;
+    --border-2:  #F3F4F6;
+
+    /* Blue — present throughout */
+    --blue:        #146EF5;
+    --blue-dark:   #0052D9;
+    --blue-darker: #003FA8;
+    --blue-light:  #4F8DF9;
+    --blue-lighter:#93B5FC;
+    --blue-tint:   #E6EFFE;
+    --blue-tint-2: rgba(20, 110, 245, 0.08);
+    --blue-tint-3: rgba(20, 110, 245, 0.14);
+
+    /* Spacing scale */
+    --m-xs: clamp(0.375rem, 0.3vw + 0.3rem, 0.5rem);
+    --m-sm: clamp(0.625rem, 0.5vw + 0.5rem, 1rem);
+    --m-md: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+    --m-lg: clamp(1.75rem, 1.2vw + 1.4rem, 2rem);
+    --m-xl: clamp(2.25rem, 2vw + 1.6rem, 3rem);
+    --sec:  clamp(3rem, 4vw + 1rem, 5rem);
+
+    /* Type scale */
+    --fz-h1: clamp(2.5rem, 5vw + 0.5rem, 4.5rem);
+    --fz-h2: clamp(1.875rem, 2.5vw + 0.5rem, 3rem);
+    --fz-h3: clamp(1.375rem, 1vw + 0.85rem, 1.75rem);
+    --fz-lg: 1.125rem;
+    --fz-bd: 1rem;
+    --fz-sm: 0.875rem;
+    --fz-xs: 0.8rem;
+
+    /* Font */
+    --font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+    /* Radii */
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--text);
+  }
+  h1 { font-size: var(--fz-h1); font-weight: 900; letter-spacing: -0.025em; line-height: 1.05; }
+  h2 { font-size: var(--fz-h2); font-weight: 700; }
+  h3 { font-size: var(--fz-h3); font-weight: 700; }
+
+  .container {
+    width: 90%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section { padding: var(--sec) 0; }
+  .section.no-top { padding-top: 0; }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .hero {
+    padding-top: clamp(3rem, 5vw + 1rem, 6rem);
+    padding-bottom: var(--sec);
+    background:
+      radial-gradient(ellipse 800px 400px at 90% 0%, rgba(20,110,245,0.06) 0%, transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--border-2);
+  }
+  .hero-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--m-lg);
+  }
+  .hero-left { flex: 1; min-width: 0; }
+  .hero-right { flex: 1; min-width: 0; padding-bottom: 12px; }
+  .hero h1 {
+    margin: 0;
+    white-space: nowrap;
+    font-size: clamp(1.875rem, 4vw + 0.25rem, 3.5rem);
+  }
+  .hero-lead {
+    font-family: var(--font);
+    font-size: var(--fz-lg);
+    color: var(--text-2);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 460px;
+    font-weight: 400;
+  }
+  /* =========================================================
+     PILLS / TAGS
+     ========================================================= */
+  .pill {
+    display: inline-block;
+    background: var(--blue-tint-3);
+    color: var(--blue-dark);
+    font-family: var(--font);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  .pill.solid {
+    background: var(--blue);
+    color: white;
+  }
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* =========================================================
+     BUTTONS
+     ========================================================= */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: var(--blue);
+    color: white;
+    border-radius: var(--r-sm);
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(20,110,245,0.25);
+  }
+  .btn svg { width: 14px; height: 14px; }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color .15s ease, gap .15s ease;
+    position: relative;
+  }
+  .cta-link::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: calc(100% - 14px);
+    height: 1px;
+    background: var(--text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease, background .15s ease;
+  }
+  .cta-link:hover {
+    color: var(--blue);
+    gap: 10px;
+  }
+  .cta-link:hover::after {
+    transform: scaleX(1);
+    background: var(--blue);
+  }
+
+  /* =========================================================
+     FEATURED CARDS
+     ========================================================= */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--m-lg);
+    align-items: stretch;
+  }
+  .featured-grid > .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-lg);
+  }
+  .featured-grid > .col-right > .card-sm {
+    flex: 1 1 0;          /* each small card grows to share column height equally */
+    min-height: 156px;    /* but never collapse below natural size */
+  }
+  .card {
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: clip;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .card:hover {
+    border-color: var(--blue-lighter);
+    box-shadow: 0 10px 32px rgba(20,110,245,0.10);
+    transform: translateY(-2px);
+  }
+  .card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+
+  /* LARGE FEATURED card — stretches to match the 3-card stack on its right */
+  .card-lg { height: 100%; }
+  .card-lg .card-image {
+    /* basis 0 (not auto) so the image fills LEFTOVER space and is not
+       inflated by the SVG's large intrinsic height */
+    flex: 1 1 0;
+    min-height: 280px;
+    background: var(--bg-3);
+    overflow: hidden;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-2);
+  }
+  .card-lg .card-image-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card-lg .card-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .card-lg .card-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  .card-lg h3 {
+    font-size: clamp(1.5rem, 2vw + 0.5rem, 2.125rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .card-lg .card-desc {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 480px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-lg .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+  .card-date {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SMALL FEATURED card */
+  .card-sm {
+    display: grid;
+    grid-template-columns: 144px 1fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: 156px;
+  }
+  .card-sm .card-image {
+    aspect-ratio: 1 / 1;
+    background: var(--bg-3);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border-2);
+  }
+  .card-sm .card-image-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .card-sm .card-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .card-sm .card-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    min-width: 0;
+  }
+  .card-sm .tags { gap: 5px; }
+  .card-sm h5 {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-sm .card-date {
+    font-size: 11.5px;
+    color: var(--text-3);
+  }
+
+  /* =========================================================
+     TIMELINE — continuous line via CSS punch-through trick
+     ========================================================= */
+  .timeline {
+    border-top: 1px solid var(--border-2);
+  }
+  .timeline-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--m-md);
+    margin-bottom: var(--m-xl);
+  }
+  .timeline-head h2 { margin: 0; }
+  .timeline-head-meta {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .timeline-head-meta b { color: var(--text); font-weight: 700; }
+
+  .timeline-list {
+    display: block;
+    /* No gap — items create spacing via internal padding-bottom: 80px */
+  }
+
+  /* === PER-ITEM GRID === */
+  .ti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 64px;
+  }
+
+  /* === LEFT COLUMN === */
+  .ti-left {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  /* The 1px-wide vertical line track */
+  .ti-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 1px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .ti-line {
+    background-color: var(--text-5);
+    width: 1px;
+    height: 100%;
+    /* KEY: extends 300px past container to visually connect to next item */
+    padding-bottom: 300px;
+  }
+
+  /* Wrapper for the sticky label */
+  .ti-title-wrapper {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  /* The actual sticky element */
+  .ti-sticky {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    position: sticky;
+    top: 32px;
+    margin-left: -12px;
+    padding-top: 4px;
+  }
+
+  /* Dot wrapper — bg matches page bg to "punch through" the line */
+  .ti-dot-wrap {
+    background-color: var(--bg);   /* MUST match page bg */
+    padding: 6px;
+    display: block;
+    flex-shrink: 0;
+  }
+  .ti-dot {
+    background-color: var(--text-4);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+  .ti.is-newest .ti-dot { background-color: var(--blue); }
+
+  /* Content next to the dot */
+  .ti-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-bottom: 80px;
+    min-width: 0;
+    gap: 14px;
+  }
+  .ti-title-link {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.55;
+    cursor: pointer;
+    transition: color .2s ease;
+    letter-spacing: -0.005em;
+    margin: 0;
+  }
+  .ti-title-link:hover { color: var(--blue); }
+  .ti-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ti-date {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ti-copy {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: var(--text-4);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s ease, color .15s ease;
+    position: relative;
+  }
+  .ti-copy svg { width: 14px; height: 14px; }
+  .ti-copy:hover { background: var(--bg-2); color: var(--blue); }
+  .ti-copy.copied { color: var(--blue); }
+  .ti-copy-tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--text);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .ti-copy.copied .ti-copy-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* === RIGHT COLUMN === */
+  .ti-right {
+    display: block;
+    padding-bottom: 80px;
+    min-width: 0;
+  }
+  .ti-image {
+    display: block;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    padding: 32px;
+    margin-bottom: 18px;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s ease;
+  }
+  .ti-image:hover { transform: translateY(-2px); border-color: var(--blue-lighter); }
+  .ti-image-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--border-2);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+  .ti-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .ti-desc {
+    font-family: var(--font);
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 14px;
+    max-width: 540px;
+    font-weight: 400;
+  }
+
+  /* Year separator — rides over the timeline line gracefully */
+  .ti-year {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 64px;
+    padding: 36px 0 24px;
+    border-top: 0;
+  }
+  .ti-year-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ti-year-track {
+    width: 1px;
+    flex-shrink: 0;
+  }
+  .ti-year-label-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    margin-left: -12px;
+    padding-left: 32px;
+    background: var(--bg);
+  }
+  .ti-year-label {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--bg);
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+  .ti-year-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .ti-year-right {
+    display: flex;
+    align-items: center;
+  }
+  .ti-year-count {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Hidden initially (Show more) */
+  .ti.hidden { display: none; }
+
+  /* Pagination */
+  .pagination-wrap {
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+  }
+  .pagination-wrap.hidden { display: none; }
+
+  /* =========================================================
+     SUPPORT
+     ========================================================= */
+  .support {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border-2);
+  }
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--m-lg);
+    align-items: stretch;
+  }
+  .support-heading h2 {
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .support-heading p {
+    color: var(--text-2);
+    margin-top: 16px;
+    max-width: 320px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .support-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 200px;
+    position: relative;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .support-card:hover {
+    border-color: var(--blue-lighter);
+    box-shadow: 0 10px 32px rgba(20,110,245,0.10);
+    transform: translateY(-2px);
+  }
+  .support-card h4 {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--text);
+    margin: 0;
+  }
+  .support-card p {
+    color: var(--text-2);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+  }
+  .support-card-arrow {
+    margin-top: 8px;
+    align-self: flex-start;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .support-card:hover .support-card-arrow {
+    background: var(--blue-dark);
+    transform: rotate(-12deg);
+  }
+  .support-card-arrow svg { width: 14px; height: 14px; }
+
+  /* =========================================================
+     FOCUS / A11Y
+     ========================================================= */
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 1024px) {
+    .hero-grid { flex-direction: column; align-items: flex-start; }
+    .hero-right { padding-bottom: 0; }
+    .featured-grid { grid-template-columns: 1fr; }
+    /* Timeline collapses to a single stacked column; the connecting line
+       is a desktop affordance, so hide the track + dot and simplify. */
+    .ti { grid-template-columns: 1fr; column-gap: 0; padding-bottom: 48px; border-bottom: 1px solid var(--border-2); }
+    .ti:last-of-type { border-bottom: none; }
+    .ti-track { display: none; }
+    .ti-left { padding-bottom: 0; }
+    .ti-title-wrapper { width: 100%; }
+    .ti-sticky { position: static; margin-left: 0; gap: 0; padding-top: 0; }
+    .ti-dot-wrap { display: none; }
+    .ti-content { padding-bottom: 24px; }
+    .ti-right { padding-bottom: 0; }
+    .ti-year { grid-template-columns: 1fr; padding: 32px 0 8px; }
+    .ti-year-track { display: none; }
+    .ti-year-label-wrap { margin-left: 0; padding-left: 0; }
+    .support-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 { white-space: normal; }
+    .card-sm { grid-template-columns: 112px 1fr; min-height: 124px; }
+    .card-sm .card-image { padding: 10px; }
+    .card-sm h5 { font-size: 1rem; -webkit-line-clamp: 2; }
+    .timeline-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="section hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1>What's new on Tracxn</h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-lead">See the latest Tracxn product launches, integrations, and data expansions — every release that makes your research faster, sharper, and more decisive.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== FEATURED CARDS ========== -->
+<section class="section no-top">
+  <div class="container">
+    <div class="featured-grid">
+
+      <!-- LARGE FEATURED — May 11, 2026 — BigQuery -->
+      <article class="card card-lg">
+        <a href="pa-detail.html" class="card-link" aria-label="Read: Bring Tracxn data directly into BigQuery"></a>
+        <div class="card-image">
+          <div class="card-image-inner">
+            <img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a0eb460a45bf9cca0a2c007_PA%20Thumbnail%20%20Big%20Query%20Integration.svg" alt="BigQuery Integration" />
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tags">
+            <span class="pill solid">Just Shipped</span>
+            <span class="pill">Integration</span>
+            <span class="pill">Enterprise</span>
+          </div>
+          <h3>Bring Tracxn data directly into your Google Cloud BigQuery</h3>
+          <p class="card-desc">Joining APIs, SFTP Dumps, and Snowflake — blend Tracxn's deep market intelligence with your internal data pipelines for large-scale analytics, with automated Merge logic.</p>
+          <div class="card-foot">
+            <span class="card-date">May 11, 2026</span>
+            <span class="cta-link">Learn more →</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 small stacked cards -->
+      <div class="col-right">
+
+        <!-- Apr 30, 2026 — Tracxn × Claude -->
+        <article class="card card-sm">
+          <a href="pa-detail.html" class="card-link" aria-label="Read: Use Tracxn's data inside Claude"></a>
+          <div class="card-image">
+            <div class="card-image-inner">
+              <img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a1408c022ff42301fb95dcb_PA%20Thumbnail%20%20Tracxn%20x%20Claude.webp" alt="Tracxn x Claude" />
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tags"><span class="pill">AI Integration</span></div>
+            <h5>Use Tracxn's data inside Claude — natively</h5>
+            <span class="card-date">Apr 30, 2026</span>
+          </div>
+        </article>
+
+        <!-- Apr 29, 2026 — 1M LE Financials -->
+        <article class="card card-sm">
+          <a href="pa-detail.html" class="card-link" aria-label="Read: 1M+ Indian LE Financials"></a>
+          <div class="card-image">
+            <div class="card-image-inner">
+              <img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a140bf594a585ff3f49b62b_Milestone%201M%20LE%20Financials%20.webp" alt="1M LE Financials Milestone" />
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tags"><span class="pill">Milestone</span></div>
+            <h5>1M+ verified financials for Indian Legal Entities</h5>
+            <span class="card-date">Apr 29, 2026</span>
+          </div>
+        </article>
+
+        <!-- Apr 23, 2026 — Regulatory Filings -->
+        <article class="card card-sm">
+          <a href="pa-detail.html" class="card-link" aria-label="Read: Regulatory filings get a comprehensive new view"></a>
+          <div class="card-image">
+            <div class="card-image-inner">
+              <img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a13f11e577aa0229b4b2dc4_PA%20Thumbnail%20%20Regulatory%20Filings%20(1).webp" alt="Regulatory Filings" />
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tags"><span class="pill">Filings</span><span class="pill">Enhancement</span></div>
+            <h5>Regulatory filings get a comprehensive new view</h5>
+            <span class="card-date">Apr 23, 2026</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section class="section timeline">
+  <div class="container">
+    <div class="timeline-head">
+      <h2>Every release, chronologically</h2>
+      <div class="timeline-head-meta"><b>49</b> updates · Jan 2025 – Apr 2026</div>
+    </div>
+
+    <div class="timeline-list" id="timeline-list">
+
+      <!-- Year 2026 -->
+      <div class="ti-year">
+        <div class="ti-year-left">
+          <div class="ti-year-track"></div>
+          <div class="ti-year-label-wrap">
+            <span class="ti-year-label">2026</span>
+            <span class="ti-year-rule"></span>
+          </div>
+        </div>
+        <div class="ti-year-right">
+          <span class="ti-year-count">12 releases</span>
+        </div>
+      </div>
+
+      <!-- Apr 27, 2026 — Discovery bundle -->
+      <article class="ti is-newest">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Discovery</span><span class="pill">Bundle</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Making company discovery more powerful — Area filter, EV/EBITDA, and 1.5M+ new company addresses</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 27, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69ef004d9dc05f67dd8d95ad_PA%20Thumbnail%20%20Collated%20Announcement.png" alt="Discovery improvements"/></div></a>
+          <p class="ti-desc">Hyper-local area filters, EV/EBITDA metrics across the platform, and physical addresses for 1.5M+ companies — a bundle of upgrades for sharper discovery and outreach.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 21, 2026 — Pipedrive Integration -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">CRM</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Streamline your CRM workflow: Tracxn + Pipedrive integration is live</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 21, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a142bc0cc653e0a39869b78__PA%20Thumbnail%20%20Pipedrive%20Integration.webp" alt="Pipedrive Integration"/></div></a>
+          <p class="ti-desc">Sync verified prospects directly into your pipeline. One-click company sync, customizable data fields, and bulk-add up to 30 companies at once.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 16, 2026 — Transactions Section -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Navigation</span><span class="pill">Update</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing the Unified Transactions section</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 16, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/6a13ed8c8f34ca7e123441ec_PA%20Thumbnail%20Transactions.webp" alt="Transactions Section"/></div></a>
+          <p class="ti-desc">Funding Rounds, Acquisitions, IPOs, and Loans &amp; Charges — now grouped under a single Transactions category with an aggregate overview dashboard.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 15, 2026 — HubSpot Enhanced -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">Enhancement</span></div>
+                <a href="pa-detail.html" class="ti-title-link">HubSpot integration enhanced — more fields, more flexibility</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 15, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69e71ceedc781f12b71261b2_PA%20Thumbnail%20%20Enhanced%20HubSpot.svg" alt="HubSpot Enhanced"/></div></a>
+          <p class="ti-desc">Sector, country, founded year, employee count, and company stage are now syncable. Plus bulk-add up to 30 companies in one click.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Mar 13, 2026 — Public Market Fundamentals -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Public Markets</span><span class="pill">Feature</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Public Market Fundamentals — every key metric in one widget</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Mar 13, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69e7181793bb5e3adf7bd4e5_PA-Market%20Overview_thumbnail.svg" alt="Public Market Fundamentals"/></div></a>
+          <p class="ti-desc">Stock price, market cap, enterprise value, EV/EBITDA, ROE, ROA — every key metric for listed companies on a single page. Multiple timeframes supported.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Mar 5, 2026 — Employee Count -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">India Data</span><span class="pill">Feature</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Real-time employee count from labour filings for Indian Legal Entities</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Mar 5, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69e70f00bd2d6f8878dc890d_PA%20Thumbnail%20%20Employee%20Count.svg" alt="Employee Count"/></div></a>
+          <p class="ti-desc">Credible employee headcount for any Indian Legal Entity — straight from labour filings, in under a minute. A growing team signals healthy business fundamentals.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Feb 16, 2026 — Past Connect Requests -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Outreach</span><span class="pill">Workflow</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Never lose track of past outreach — unified Connects history</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Feb 16, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba58370096b7168ef738_PA_Thumbnail__Unified_Past_Activity_View_nJTSRvL25PIS09ff0G-Ae.svg" alt="Past Connect Requests"/></div></a>
+          <p class="ti-desc">Every connect request, across every channel, in a single centralized history with timestamps and total counts.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Feb 11, 2026 — Cross Directorships -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Diligence</span><span class="pill">India</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Cross Directorships on Legal Entity Profiles</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Feb 11, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb587f342f7cd77215516_PA_Thumbnail__Cross_Directorships_cZUroIQd0ZJ0BqsbbTieT.svg" alt="Cross Directorships"/></div></a>
+          <p class="ti-desc">Assess financial risk, detect red flags, and identify key connectors across a director's entire network of entities.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jan 28, 2026 — Saved Search Selector -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Workflow</span><span class="pill">Discovery</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Streamlining Your Workflow: Saved Search Selector and Table View</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jan 28, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5888533c09d0dadead7_PA_Thumbnail__Saved_searchtable_view_(1)_Vo17mw7ec9vp2C5-hoGc_.svg" alt="Saved Search Selector"/></div></a>
+          <p class="ti-desc">Toggle between saved searches without leaving the list page. See new-match counts at a glance, and switch between Table and Wall views on the fly.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jan 22, 2026 — Investor Representatives -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Investors</span><span class="pill">Diligence</span></div>
+                <a href="pa-detail.html" class="ti-title-link">See investor representatives connected to each investment</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jan 22, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb587846c91fb124b97fe_PA_Thumbnail__Board_members_S4oSoRkRcmHJmNDbR70Ss.svg" alt="Investor Representatives"/></div></a>
+          <p class="ti-desc">Map strategic influence in the boardroom. Identify which partners shape strategy at portfolio companies, and discover the key connectors driving deals.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jan 19, 2026 — M&A Live Deals -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Live Deals</span><span class="pill">M&amp;A</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing M&amp;A Deals on Live Deals</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jan 19, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba577f791a5b73c1303f_PA_thumbnail__M_A_deals_Hroa7qT03cT-1iGAKQf_6.svg" alt="M&amp;A Live Deals"/></div></a>
+          <p class="ti-desc">Browse acquisition opportunities with critical metrics — stake size, target valuation, existing funding, transaction duration — all in one consolidated view.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jan 15, 2026 — AI Search and Filter -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">AI</span><span class="pill">Discovery</span></div>
+                <a href="pa-detail.html" class="ti-title-link">A faster way to find what you're looking for: Introducing AI Search and Filter</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jan 15, 2026</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58770ddce8154664bc7_PA_Thumbnail__AI_SearchFilter_gWcfDUUCpKqcjRhfQHROB.svg" alt="AI Search and Filter"/></div></a>
+          <p class="ti-desc">Type a question, get a pre-filtered list of companies. Layer queries one after another for iterative, transparent research.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Year 2025 -->
+      <div class="ti-year">
+        <div class="ti-year-left">
+          <div class="ti-year-track"></div>
+          <div class="ti-year-label-wrap">
+            <span class="ti-year-label">2025</span>
+            <span class="ti-year-rule"></span>
+          </div>
+        </div>
+        <div class="ti-year-right">
+          <span class="ti-year-count">37 releases</span>
+        </div>
+      </div>
+
+      <!-- Dec 29, 2025 — Export Center -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Workflow</span><span class="pill">Exports</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing the new Export Center: Track and download data instantly</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Dec 29, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb586dd0be9259eb87084_PA_Thubmnail__Exports_icon__1__CWEcCPh5s5y7z6iodNa0R.svg" alt="Export Center"/></div></a>
+          <p class="ti-desc">Real-time visibility into every export. Track and download files directly on-platform with smart status indicators.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Dec 24, 2025 — Customise Column -->
+      <article class="ti">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Workflow</span><span class="pill">Tables</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing the Customise Column option: Choose the metrics you want</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Dec 24, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb586990604c5bc9356a4_PA_Thumbnail__Customise_Column_view__2___UslRdhc2qfACjmxA2s0L.svg" alt="Customise Column"/></div></a>
+          <p class="ti-desc">Smart grouping, drag-and-drop reordering, flexible add/remove. Build your perfect table view in seconds.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- The following items are hidden initially -->
+
+      <!-- Dec 10, 2025 — Tracxn MCP -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">AI</span><span class="pill">Integration</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Get smarter real-time insights: Tracxn MCP brings AI-powered research</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Dec 10, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba5c848e4771e3e64ce7_PA_Thumbnail__Tracxn_MCP_qnAM01GF62oGWmOobuG-D.svg" alt="Tracxn MCP"/></div></a>
+          <p class="ti-desc">Connect Tracxn directly with AI models like Claude. Fetch live data and insights through natural conversation.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Dec 8, 2025 — My Profile Menu -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Workflow</span><span class="pill">Account</span></div>
+                <a href="pa-detail.html" class="ti-title-link">We've made it easier to manage your account</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Dec 8, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb586a5169294d7cdcf36_PA_Thumbnail__My_profile_menu_v3JnvMDaQ39mBA5vQqDsG.svg" alt="My Profile Menu"/></div></a>
+          <p class="ti-desc">Security, requests, credits, and downloaded data — consolidated into a single intuitively grouped hub.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Dec 5, 2025 — Corporate Structures -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Diligence</span><span class="pill">India</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Corporate Structures: Clear Ownership Insights for India's Legal Entities</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Dec 5, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba542d9eb56d59065b2d_PA_Thumbnail__Corporate_Structure__1__J-sAOBCQIoLga-7oIMboi.svg" alt="Corporate Structures"/></div></a>
+          <p class="ti-desc">Visually map holding companies, subsidiaries, and associates. Understand ownership layers instantly — sourced from official MGT-7 filings.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Nov 12, 2025 — Microsoft Outlook -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">Outreach</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Seamless outreach: Introducing Microsoft Outlook Integration</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Nov 12, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58576cc9cba659b0085_PA_Thumbnail__Microsoft_Integration_oisQcCSzYRVfPD6FnA5Eo.svg" alt="Microsoft Outlook"/></div></a>
+          <p class="ti-desc">Send outreach emails from your own verified Outlook ID — without ever switching tabs. Higher deliverability, trusted business domain.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Oct 30, 2025 — Affinity -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">CRM</span></div>
+                <a href="pa-detail.html" class="ti-title-link">A smarter, simpler CRM: Announcing the Tracxn + Affinity integration</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Oct 30, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58515426c485b18ba9f_PA_thumbnail__Affinity_Integration_ijTpp5qaPRVviM6V5caEk.svg" alt="Affinity Integration"/></div></a>
+          <p class="ti-desc">Discover, enrich, and sync verified company data into Affinity in one click.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Oct 20, 2025 — Embed CRM -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">CRM</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Enhance your workflow with new CRM integrations — Salesforce, Pipedrive, Dynamics 365</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Oct 20, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba54959815c2f8f5793f_PA_Thumbnail__Iframe_Integration_SBtpnwrrEZpYGrW1sx-JE.svg" alt="Embed CRM Integrations"/></div></a>
+          <p class="ti-desc">Salesforce, Pipedrive, and Microsoft Dynamics 365 — open Tracxn directly within your CRM workspace for smoother navigation.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Oct 17, 2025 — Pre-money Valuation -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Valuations</span><span class="pill">Trends</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Pre-money Valuation Trends — gain a complete view of valuations</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Oct 17, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba5315097da46bf16b42_PA_Thumbnail_-_Pre_money_and_Post_money_view_UGh5OTetzxkIojB6fzCF8.svg" alt="Pre-money Valuations"/></div></a>
+          <p class="ti-desc">Track how companies grow in value before external funding. Toggle between pre-money and post-money trends seamlessly.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Oct 13, 2025 — Compare Financials -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Financials</span><span class="pill">Benchmarking</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Compare financials of multiple companies in a single view</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Oct 13, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58426d67c7560079ae9_PA_Thumbnail__Compare_tool_U_wFvT3eXeGkBGWwMdqgU.svg" alt="Compare Financials"/></div></a>
+          <p class="ti-desc">Benchmark up to 10 companies side-by-side on income, balance sheets, ratios, and 5-year CAGR — making evaluation faster and more insightful.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Sep 30, 2025 — LE filings new geos -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Data Expansion</span><span class="pill">Documents</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Legal Entity filings now live for Germany, NZ, Norway &amp; Denmark</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Sep 30, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb584b918e8d4f1884a2e_PA_Thumbnail__LE_Page__More_countries__2___DSVcCBZ__BtwkSzQFj-Y.svg" alt="LE filings new geos"/></div></a>
+          <p class="ti-desc">Seamless cross-border research with expanded filings coverage across four new geographies.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Sep 25, 2025 — Hire an IB tag -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Live Deals</span><span class="pill">Tags</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Spot founders actively seeking Investment Bankers with the "Hire an IB" tag</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Sep 25, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb584cf51eee97a89f249_PA_Thumbnail__Hire_an_IB_Tag_SaOIt3eHcKeOjyveifvsF.svg" alt="Hire an IB tag"/></div></a>
+          <p class="ti-desc">The new tag on Live Deal cards surfaces founders ready to engage professional support.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Sep 12, 2025 — 1000 LiveDeals -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Milestone</span><span class="pill">Live Deals</span></div>
+                <a href="pa-detail.html" class="ti-title-link">We now have 1000+ Active LiveDeals</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Sep 12, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5849a47f03079ef50a8_Milestone_Thumbnail__1000_Active_equity_deals__2__XO6K6eHmER9GYQ7Px_-Pp.svg" alt="1000 LiveDeals milestone"/></div></a>
+          <p class="ti-desc">One of the largest collections of curated startup deals available globally — across sectors, stages, and geographies.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Sep 2, 2025 — Customizable Key Metrics -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Personalization</span><span class="pill">Detail Pages</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Personalize and view what matters most with customizable Key Metrics</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Sep 2, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba528e37329dcc3bf55a_PA_Thumbnail___SSyzkq64H3vWuOUwTU3Us.svg" alt="Customizable Key Metrics"/></div></a>
+          <p class="ti-desc">Choose what shows first on Company, Fund, IB, and LE pages. One-time setup, persistent across sessions.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 28, 2025 — AI Sectors Tab -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">AI</span><span class="pill">Sectors</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing the AI Sectors Tab</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 28, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5838a1e98af585c352c_PA_Thumbnail__AI_sectors_Tab_M5sxOq0uu6b3oML7-N2dy.svg" alt="AI Sectors Tab"/></div></a>
+          <p class="ti-desc">A dedicated tab for AI-centric practice areas — Generative AI, AI as a Service, Agentic AI, and more.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 26, 2025 — Secondary Deals enhanced -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Live Deals</span><span class="pill">Secondaries</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Manage Secondary Deals with more data points &amp; enhanced navigation</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 26, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb583f2fbfdf38db54c14_PA_Thumbnail__Live_deals__Secondary_deal__2__hjivBRl7vRKJ-VhShySRk.svg" alt="Secondary Deals enhanced"/></div></a>
+          <p class="ti-desc">Indicative block size, share class, company approvals, and a new "Leave Interest" option — secondary deals just got far more transparent.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 25, 2025 — Advanced Filters -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Filters</span><span class="pill">Search</span></div>
+                <a href="pa-detail.html" class="ti-title-link">"Advanced Filters" now live on more databases</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 25, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5834bfbe32a81b94d62_PA_Thumbnail__Advanced_Filters_n9g7DOePnxftYhlYlclLw.svg" alt="Advanced Filters"/></div></a>
+          <p class="ti-desc">Build queries with AND, OR, and NOT logic on Funding Rounds and Investors list pages.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 21, 2025 — Chrome Extension LinkedIn -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Extension</span><span class="pill">LinkedIn</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Access people and company details instantly on LinkedIn with our Chrome Extension</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 21, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba5c848e4771e3e64cc3_PA_Thumbnail__Chrome_extension__LI_People_Profile__1__oL9KiLALr6P5IW6t-Wzr-.svg" alt="Chrome Extension LinkedIn"/></div></a>
+          <p class="ti-desc">View rich professional, company, and investment data directly on any LinkedIn profile.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 6, 2025 — Navigation Panel -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Navigation</span><span class="pill">UX</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Discover the new Navigation Panel</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 6, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb583aac8224b1e097d4b_PA_Thumbnail__New_Products_Menu_ThUOuvrgeIRE5OFsF88UH.svg" alt="Navigation Panel"/></div></a>
+          <p class="ti-desc">A redesigned left-side menu with clearly organized categories and a more intuitive layout.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Aug 5, 2025 — Quick Access -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Dashboard</span><span class="pill">Personalization</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing the new "Quick Access" section on your Home Dashboard</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Aug 5, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb582848e4771e3e50ca2_PA_Thumbnail__Quick_access_section__1__CEjkmndtRyUNdw6mjX8kr.svg" alt="Quick Access section"/></div></a>
+          <p class="ti-desc">Customize tiles, reorder products, and personalize your view for a consistent experience.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jul 21, 2025 — WhatsApp Live Deals -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Live Deals</span><span class="pill">Messaging</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Start WhatsApp Conversations directly from Live Deal Pages</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jul 21, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb583be5decafea50a65f_PA_Thumbnail__Live_deals__Connect_via_WA_FJUCUrxx62THH3wBQ0zoO.svg" alt="WhatsApp Live Deals"/></div></a>
+          <p class="ti-desc">Initiate a WhatsApp chat directly from the Connect button — fewer missed conversations.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jul 17, 2025 — Cap Tables 6 geos -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Data Expansion</span><span class="pill">Cap Tables</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Cap Tables are now available in Finland, Indonesia, Thailand, Latvia, Slovakia &amp; Malta</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jul 17, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58295d37017d08b4540_PA_Thumbnail__Captables_JSgAnGmfn0_OkW_qSq5xm.svg" alt="Cap Tables 6 geographies"/></div></a>
+          <p class="ti-desc">Deeper stakeholding insights for cross-border deals, with ownership breakdown and fund-to-firm mapping.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jul 16, 2025 — Clinical Trials -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Healthcare</span><span class="pill">New Dataset</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Clinical Trials: Gain Visibility into Research in Healthcare</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jul 16, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58292287cc5287bdee4_PA_Thumbnail__Clinical_Trials_CIW9y9jazO4iUYv5Zq--a.svg" alt="Clinical Trials"/></div></a>
+          <p class="ti-desc">Evaluate pharma and healthcare companies through their R&amp;D pipeline. Filter by phase, condition, geography.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jun 26, 2025 — Financials new geos -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Data Expansion</span><span class="pill">Financials</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Financials now available in Brazil, Philippines, Slovakia &amp; Malta</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jun 26, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58227af363fdfeafa27_PA_Thumbnail__New_geos_covered__2__ZaMbSmnVrsp-U_4XQXC_A.svg" alt="Financials new geos"/></div></a>
+          <p class="ti-desc">Detailed balance sheets, income statements, and cash flow insights across four new geographies.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jun 16, 2025 — LE Reports -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Reports</span><span class="pill">Diligence</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Detailed Legal Entity Reports — From profiles to PDF in just a click</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jun 16, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba4f36fa879bcd7d15c6_PA_Thumbnail__Buy_reports_xM_rXpJXeR1Vq-FRSgmDe.svg" alt="LE Reports"/></div></a>
+          <p class="ti-desc">Due diligence essentials, risk red flags, and strategic insights consolidated into a downloadable PDF.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jun 13, 2025 — HubSpot Integration -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Integration</span><span class="pill">CRM</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Tracxn's HubSpot integration is now live!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jun 13, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb581819d36b79c3dfbb6_PA_Thumbnail__Hubspot_Integration__1__z5t1Q0uwkML67DSPIgzij.svg" alt="HubSpot Integration"/></div></a>
+          <p class="ti-desc">Add verified company profiles to HubSpot in one click. Auto-sync key info to enrich your CRM records.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- May 30, 2025 — Comprehensive Filings -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Documents</span><span class="pill">Data Expansion</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Now get comprehensive filings at the click of a button</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">May 30, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5815180e915ad213eda_PA__Thumbnail_image__LE_checkout__3__Y8roB-rw_tqI-O0WwWRfR.svg" alt="Comprehensive filings"/></div></a>
+          <p class="ti-desc">Access official Legal Entity documents for India, UK, Estonia, Croatia, and Thailand — directly in-platform.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- May 29, 2025 — Compare across geos -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Benchmarking</span><span class="pill">Sectors</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Compare how a market looks across cities &amp; countries in a single view</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">May 29, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58176ee568ef3add9b4_PA__Coverage_Areas_Page__Introduced_Compare_Sector_Across_Geos_View___6__x2SYsjyCLV3IzjYUAOUaV.svg" alt="Compare across geographies"/></div></a>
+          <p class="ti-desc">Benchmark sector performance in up to 3 geographies at once across investment, acquisition, and IPO metrics.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- May 23, 2025 — Timeline View CRM -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">CRM</span><span class="pill">Analytics</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Monitor your CRM's health effortlessly with the new Timeline View</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">May 23, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb58150b716e5746eb2f3_PA_Thumbnail__Timeline_view_U19ijqn6pYzF6L9PpdCoM.svg" alt="Timeline View CRM"/></div></a>
+          <p class="ti-desc">Track pipeline growth, sourcing efficiency, and team contributions week-on-week or month-on-month.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 22, 2025 — Trending Themes -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Discovery</span><span class="pill">Sectors</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Discover trending business models in a sector of your interest!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 22, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb581102a5b5d2d50a5e1_PA_thumbnail__trending_themes_i1onS33xmja8CORdxFNLj.svg" alt="Trending Themes"/></div></a>
+          <p class="ti-desc">Identify emerging models gaining traction with a curated list of companies and key insights for each theme.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 21, 2025 — Live Deals Secondaries -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Live Deals</span><span class="pill">Secondaries</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Tracxn's Live Deals now supports Secondaries!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 21, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb5812df2aa3901a25f48_Live_Deals-_Secondary_deals_YKG-bQN8kMnSO2VGw9N5d.svg" alt="Live Deals Secondaries"/></div></a>
+          <p class="ti-desc">Post and discover active Secondary deals across the globe inside Live Deals.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Apr 14, 2025 — Follow Feature -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Tracking</span><span class="pill">Alerts</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Easily track companies of your choice with our newly introduced "Follow" feature</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Apr 14, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb57f1d1449084407a0d1_PA__Thumbnail_image__Follow_feature____iyXbfH0xGJvl_IvJKbs.svg" alt="Follow feature"/></div></a>
+          <p class="ti-desc">Follow once and receive funding rounds, acquisitions, and updates in your inbox and Home feed.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Mar 26, 2025 — 250K Europe events -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Europe</span><span class="pill">Milestone</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Covering 250K+ Funding &amp; Exit events across Europe!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Mar 26, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb57f61dc02dc73cd4678_Covering_250K__Exit___Funding_activities_across_Europe__3hHtumnD1fH2rOuCENUJn.svg" alt="250K Europe events"/></div></a>
+          <p class="ti-desc">Deal sourcing, competitive intelligence, and M&amp;A strategy — backed by our most comprehensive Europe coverage yet.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Mar 3, 2025 — Top Sectors by Funding -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Trends</span><span class="pill">Sectors</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing "Top Sectors by Funding" – Your Window into Market Trends!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Mar 3, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba4d6725cdf20a445a32_VIEW_TOP_SECTORS_BY_FUNDING_9XodAfpDH83dGCo3Kvia1.svg" alt="Top Sectors by Funding"/></div></a>
+          <p class="ti-desc">Analyze funding trends across sectors and sub-sectors — total funding, rounds, deals, and key companies.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Feb 26, 2025 — Advanced Search -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Search</span><span class="pill">Discovery</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Advanced Search – Find What You Need Faster!</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Feb 26, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba4ddd0be9259eb99354_Recommended_K1Kv3FY5NNSMcWgR3Ardd.svg" alt="Advanced Search"/></div></a>
+          <p class="ti-desc">Smart operators, direct navigation to relevant databases, and access to every dataset.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Feb 17, 2025 — Comparables -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Benchmarking</span><span class="pill">Valuations</span></div>
+                <a href="pa-detail.html" class="ti-title-link">Introducing Comparables — benchmark companies against global leaders</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Feb 17, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbba4dc01c7abaca316068_PA_Introducing_Comparables_fbeP1gNNM87SuKXQB5msn.svg" alt="Comparables"/></div></a>
+          <p class="ti-desc">P/S, P/E, acquisition multiples, and revenue multiples for comparable companies — all in one place.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+      <!-- Jan 6, 2025 — 60M Legal Entities -->
+      <article class="ti hidden">
+        <div class="ti-left">
+          <div class="ti-track"><div class="ti-line"></div></div>
+          <div class="ti-title-wrapper">
+            <div class="ti-sticky">
+              <div class="ti-dot-wrap"><div class="ti-dot"></div></div>
+              <div class="ti-content">
+                <div class="tags"><span class="pill">Milestone</span><span class="pill">Global Data</span></div>
+                <a href="pa-detail.html" class="ti-title-link">We are now covering over 60 million legal entities worldwide</a>
+                <div class="ti-eyebrow">
+                  <span class="ti-date">Jan 6, 2025</span>
+                  <button class="ti-copy" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg><span class="ti-copy-tooltip">URL copied</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ti-right">
+          <a href="pa-detail.html" class="ti-image"><div class="ti-image-inner"><img src="https://cdn.prod.website-files.com/6202aebdedf6976e551065dd/69cbb57f65348bae50083dfb_Recommended__2__85rYfio6CSQmQqHijHBxX.svg" alt="60M Legal Entities"/></div></a>
+          <p class="ti-desc">CIN, LEI codes, latest financials, cap tables, and more — at your fingertips for global due diligence.</p>
+          <a href="pa-detail.html" class="cta-link">Learn more →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="pagination-wrap" id="pagination-wrap">
+      <button class="btn" id="show-more">
+        Show more
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SUPPORT ========== -->
+<section class="section support">
+  <div class="container">
+    <div class="support-grid">
+      <div class="support-heading">
+        <h2>Still need help?</h2>
+        <p>Browse the Help Center, get live support, or follow our latest updates by email.</p>
+      </div>
+      <a href="#" class="support-card">
+        <h4>Visit the Help Center</h4>
+        <p>Step-by-step articles, how-tos, and feature walkthroughs for every part of the platform.</p>
+        <span class="support-card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </span>
+      </a>
+      <a href="#" class="support-card">
+        <h4>Talk to Support</h4>
+        <p>Live chat, email, and WhatsApp — 24/7. We're available whenever you need an answer.</p>
+        <span class="support-card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ---------- Show more (pagination) ----------
+  (function () {
+    const list = document.getElementById('timeline-list');
+    const btn = document.getElementById('show-more');
+    const wrap = document.getElementById('pagination-wrap');
+    if (!list || !btn) return;
+    const BATCH = 8;
+
+    btn.addEventListener('click', () => {
+      const hidden = Array.from(list.querySelectorAll('.ti.hidden'));
+      hidden.slice(0, BATCH).forEach(el => el.classList.remove('hidden'));
+      const remaining = list.querySelectorAll('.ti.hidden').length;
+      if (remaining === 0) wrap.classList.add('hidden');
+    });
+  })();
+
+  // ---------- Copy link ----------
+  (function () {
+    document.querySelectorAll('.ti-copy').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const title = btn.closest('.ti').querySelector('.ti-title-link')?.textContent.trim() || '';
+        const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').slice(0, 80);
+        const url = window.location.href.split('#')[0] + '#' + slug;
+        try { navigator.clipboard.writeText(url); } catch {}
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1600);
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
