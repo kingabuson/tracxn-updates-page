@@ -233,11 +233,11 @@
   .featured-grid > .col-right {
     display: flex;
     flex-direction: column;
-    gap: var(--m-lg);
+    gap: 20px;            /* tighter than --m-lg so the trio fits a typical viewport */
   }
   .featured-grid > .col-right > .card-sm {
     flex: 1 1 0;          /* each small card grows to share column height equally */
-    min-height: 156px;    /* but never collapse below natural size */
+    min-height: 138px;    /* shorter — keeps the whole featured row above the fold */
   }
   .card {
     position: relative;
@@ -266,10 +266,10 @@
     /* basis 0 (not auto) so the image fills LEFTOVER space and is not
        inflated by the SVG's large intrinsic height */
     flex: 1 1 0;
-    min-height: 280px;
+    min-height: 220px;
     background: var(--bg-3);
     overflow: hidden;
-    padding: 32px;
+    padding: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -337,15 +337,15 @@
   /* SMALL FEATURED card */
   .card-sm {
     display: grid;
-    grid-template-columns: 144px 1fr;
+    grid-template-columns: 132px 1fr;
     gap: 0;
     align-items: stretch;
-    min-height: 156px;
+    min-height: 138px;
   }
   .card-sm .card-image {
     aspect-ratio: 1 / 1;
     background: var(--bg-3);
-    padding: 14px;
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,10 +369,10 @@
     object-fit: contain;
   }
   .card-sm .card-body {
-    padding: 20px 24px;
+    padding: 16px 22px 16px 18px;   /* tighter left padding so text sits closer to the thumb */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
     min-width: 0;
   }
@@ -1076,7 +1076,6 @@
             <span class="pill">Enterprise</span>
           </div>
           <h3>Bring Tracxn data directly into your Google Cloud BigQuery</h3>
-          <p class="card-desc">Joining APIs, SFTP Dumps, and Snowflake — blend Tracxn's deep market intelligence with your internal data pipelines for large-scale analytics, with automated Merge logic.</p>
           <div class="card-foot">
             <span class="card-date">May 11, 2026</span>
             <span class="cta-link">Learn more →</span>
