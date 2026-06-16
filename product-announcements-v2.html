@@ -136,7 +136,8 @@
     padding-top: clamp(3rem, 5vw + 1rem, 6rem);
     padding-bottom: var(--sec);
     background: transparent;   /* let the body::before sky-blue wash show through */
-    border-bottom: 1px solid rgba(20, 110, 245, 0.10);
+    /* No border-bottom — the gradient itself handles the visual transition
+       from hero to featured cards. A 1px line on a blue wash reads as a seam. */
   }
   .hero-grid {
     display: flex;
