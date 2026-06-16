@@ -148,15 +148,21 @@
     margin: 0;
     white-space: nowrap;
     font-size: clamp(1.875rem, 4vw + 0.25rem, 3.5rem);
+    color: var(--text);
+    /* Very subtle white halo — keeps the heading crisp against the bright
+       sky-blue wash without reading as a decorative drop-shadow. */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55);
   }
   .hero-lead {
     font-family: var(--font);
     font-size: var(--fz-lg);
-    color: var(--text-2);
+    /* Darker than --text-2 so it stays readable on the saturated blue */
+    color: var(--text-1);
     line-height: 1.5;
     margin: 0;
     max-width: 460px;
     font-weight: 400;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   }
   /* =========================================================
      PILLS / TAGS
@@ -262,16 +268,24 @@
   .card {
     position: relative;
     background: var(--bg);
-    border: 1px solid var(--border);
+    /* Slightly stronger than --border so the edge stays visible on the
+       sky-blue wash; on white surfaces this still reads as a soft hairline. */
+    border: 1px solid rgba(11, 20, 38, 0.10);
     border-radius: var(--r-md);
     overflow: clip;
     display: flex;
     flex-direction: column;
+    /* Soft default lift so featured cards separate from the blue wash. */
+    box-shadow:
+      0 1px 2px rgba(11, 20, 38, 0.04),
+      0 4px 14px rgba(11, 20, 38, 0.06);
     transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
   }
   .card:hover {
     border-color: var(--blue-lighter);
-    box-shadow: 0 10px 32px rgba(20,110,245,0.10);
+    box-shadow:
+      0 2px 4px rgba(11, 20, 38, 0.05),
+      0 12px 32px rgba(20, 110, 245, 0.14);
     transform: translateY(-2px);
   }
   .card-link {
