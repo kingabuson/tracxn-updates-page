@@ -83,10 +83,10 @@
     font-size: 1rem;
     position: relative;
   }
-  /* Sky-blue wash + vertical pinstripe pattern, anchored to the top of the
-     page. Scrolls with the document. A linear mask fades the whole element
-     (stripes, highlight, base) to transparent ~1100px down, so the hero +
-     featured row sit in a soft striped wash that's gone by the timeline. */
+  /* Hero background image — soft blurred sky-blue clusters on white.
+     Anchored to the top of the page, scrolls with the document. A linear
+     mask fades the whole element to transparent ~1100px down, so the hero +
+     featured row sit on the artwork and it's gone by the timeline. */
   body::before {
     content: "";
     position: absolute;
@@ -96,18 +96,10 @@
     height: 1100px;
     pointer-events: none;
     z-index: -1;
-    background:
-      /* Pinstripes — 1px lines every 38px, very subtle */
-      repeating-linear-gradient(90deg,
-        rgba(20, 110, 245, 0.10) 0px,
-        rgba(20, 110, 245, 0.10) 1px,
-        transparent 1px,
-        transparent 38px),
-      /* Soft radial highlight on the upper-right */
-      radial-gradient(ellipse 1100px 540px at 88% 8%, rgba(20, 110, 245, 0.14) 0%, transparent 65%),
-      /* Solid sky-blue base (mask handles the fade) */
-      linear-gradient(180deg, #DAE5FC 0%, #E4ECFD 100%);
-    /* Mask fades stripes + base together as you scroll past */
+    background-image: url("hero-bg.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
     -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
     mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
   }
